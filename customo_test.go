@@ -14,12 +14,12 @@ func TestC(t *testing.T) {
 	}{
 		{
 			"Bold and crossed",
-			FBold | FCrossed,
+			AttrBold | AttrCrossed,
 			fmt.Sprintf("\x1b[1;9m%v\x1b[0m", normalStr),
 		},
 		{
 			"Italic and blink",
-			FItalic | FBlink,
+			AttrItalic | AttrBlink,
 			fmt.Sprintf("\x1b[3;5m%v\x1b[0m", normalStr),
 		},
 		{
@@ -33,7 +33,7 @@ func TestC(t *testing.T) {
 		t.Run(test.title, func(t *testing.T) {
 			c := New()
 
-			c.AddFlags(test.flags)
+			c.AddAttrs(test.flags)
 
 			str := c.FormatString(normalStr)
 

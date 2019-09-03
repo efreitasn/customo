@@ -4,46 +4,50 @@ import (
 	"strings"
 )
 
-// These flags are added to the outputted string the order below.
+// These attributes are added to the outputted string in the order below.
 const (
-	FBold = 1 << iota
-	FItalic
-	FBlink
-	FCrossed
+	AttrBold = 1 << iota
+	AttrItalic
+	AttrBlink
+	AttrCrossed
 )
 
+// C is the representation of attributes to be used in a string.
 type C struct {
-	flags int
+	attrs int
 }
 
+// New returns a new representation of attributes to be used in a string.
 func New() *C {
 	return &C{}
 }
 
-func (c *C) AddFlags(flags int) {
-	c.flags |= flags
+// AddAttrs adds attributes.
+func (c *C) AddAttrs(attrs int) {
+	c.attrs |= attrs
 }
 
+// FormatString formats str using the added attributes.
 func (c *C) FormatString(str string) string {
 	var b strings.Builder
 
-	if c.flags == 0 {
+	if c.attrs == 0 {
 		return str
 	}
 
-	c.writeFlags(&b)
+	c.writeAttrs(&b)
 	b.WriteString(str)
 	b.WriteString("\x1b[0m")
 
 	return b.String()
 }
 
-func (c *C) writeFlags(b *strings.Builder) {
+func (c *C) writeAttrs(b *strings.Builder) {
 	atLeastOneFlag := false
 	b.WriteString("\x1b[")
 
 	// Bold
-	if c.flags&FBold != 0 {
+	if c.attrs&AttrBold != 0 {
 		if atLeastOneFlag {
 			b.WriteString(";1")
 		} else {
@@ -53,7 +57,7 @@ func (c *C) writeFlags(b *strings.Builder) {
 	}
 
 	// Italic
-	if c.flags&FItalic != 0 {
+	if c.attrs&AttrItalic != 0 {
 		if atLeastOneFlag {
 			b.WriteString(";3")
 		} else {
@@ -63,7 +67,7 @@ func (c *C) writeFlags(b *strings.Builder) {
 	}
 
 	// Blink
-	if c.flags&FBlink != 0 {
+	if c.attrs&AttrBlink != 0 {
 		if atLeastOneFlag {
 			b.WriteString(";5")
 		} else {
@@ -73,7 +77,7 @@ func (c *C) writeFlags(b *strings.Builder) {
 	}
 
 	// Crossed
-	if c.flags&FCrossed != 0 {
+	if c.attrs&AttrCrossed != 0 {
 		if atLeastOneFlag {
 			b.WriteString(";9")
 		} else {

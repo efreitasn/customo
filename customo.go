@@ -13,7 +13,7 @@ const (
 	AttrCrossed
 )
 
-// Background colors
+// Background colors.
 const (
 	Bg8BitBlack         = 40
 	Bg8BitBrightBlack   = 100
@@ -33,7 +33,7 @@ const (
 	Bg8BitBrightWhite   = 107
 )
 
-// Foreground colors
+// Foreground colors.
 const (
 	Fg8BitBlack         = 30
 	Fg8BitBrightBlack   = 90
@@ -72,13 +72,13 @@ func (c *C) AddAttrs(attrs int) {
 	c.attrs |= attrs
 }
 
-// SetBg8BitAttr sets the background attribute using an 8-bit color
+// SetBg8BitAttr sets the background attribute using an 8-bit color.
 func (c *C) SetBg8BitAttr(color int) {
 	c.bgSet = true
 	c.bg = color
 }
 
-// SetFg8BitAttr sets the background attribute using an 8-bit color
+// SetFg8BitAttr sets the background attribute using an 8-bit color.
 func (c *C) SetFg8BitAttr(color int) {
 	c.fgSet = true
 	c.fg = color
@@ -103,7 +103,7 @@ func (c *C) writeAttrs(b *strings.Builder) {
 	atLeastOneFlag := false
 	b.WriteString("\x1b[")
 
-	// Bold
+	// Bold.
 	if c.attrs&AttrBold != 0 {
 		if atLeastOneFlag {
 			b.WriteString(";1")
@@ -113,7 +113,7 @@ func (c *C) writeAttrs(b *strings.Builder) {
 		}
 	}
 
-	// Italic
+	// Italic.
 	if c.attrs&AttrItalic != 0 {
 		if atLeastOneFlag {
 			b.WriteString(";3")
@@ -123,7 +123,7 @@ func (c *C) writeAttrs(b *strings.Builder) {
 		}
 	}
 
-	// Blink
+	// Blink.
 	if c.attrs&AttrBlink != 0 {
 		if atLeastOneFlag {
 			b.WriteString(";5")
@@ -133,7 +133,7 @@ func (c *C) writeAttrs(b *strings.Builder) {
 		}
 	}
 
-	// Crossed
+	// Crossed.
 	if c.attrs&AttrCrossed != 0 {
 		if atLeastOneFlag {
 			b.WriteString(";9")
@@ -143,7 +143,7 @@ func (c *C) writeAttrs(b *strings.Builder) {
 		}
 	}
 
-	// Background color
+	// Background color.
 	if c.bgSet {
 		if atLeastOneFlag {
 			b.WriteString(";" + strconv.Itoa(c.bg))
@@ -153,10 +153,10 @@ func (c *C) writeAttrs(b *strings.Builder) {
 		}
 	}
 
-	// Foreground color
+	// Foreground color.
 	if c.fgSet {
 		if atLeastOneFlag {
-			b.WriteString("a;" + strconv.Itoa(c.fg))
+			b.WriteString(";" + strconv.Itoa(c.fg))
 		} else {
 			atLeastOneFlag = true
 			b.WriteString(strconv.Itoa(c.fg))
@@ -166,7 +166,7 @@ func (c *C) writeAttrs(b *strings.Builder) {
 	b.WriteString("m")
 }
 
-// Test purposes
+// Test purposes.
 func escapeStr(str string) string {
 	return strings.ReplaceAll(str, "\x1b", "\\x1b")
 }

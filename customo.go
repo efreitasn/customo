@@ -1,6 +1,7 @@
 package customo
 
 import (
+	"errors"
 	"strconv"
 	"strings"
 )
@@ -13,44 +14,44 @@ const (
 	AttrCrossed
 )
 
-// Background colors.
-const (
-	Bg8BitBlack         = 40
-	Bg8BitBrightBlack   = 100
-	Bg8BitRed           = 41
-	Bg8BitBrightRed     = 101
-	Bg8BitGreen         = 42
-	Bg8BitBrightGreen   = 102
-	Bg8BitYellow        = 43
-	Bg8BitBrightYellow  = 103
-	Bg8BitBlue          = 44
-	Bg8BitBrightBlue    = 104
-	Bg8BitMagenta       = 45
-	Bg8BitBrightMagenta = 105
-	Bg8BitCyan          = 46
-	Bg8BitBrightCyan    = 106
-	Bg8BitWhite         = 47
-	Bg8BitBrightWhite   = 107
-)
-
 // Foreground colors.
 const (
-	Fg8BitBlack         = 30
-	Fg8BitBrightBlack   = 90
-	Fg8BitRed           = 31
-	Fg8BitBrightRed     = 91
-	Fg8BitGreen         = 32
-	Fg8BitBrightGreen   = 92
-	Fg8BitYellow        = 33
-	Fg8BitBrightYellow  = 93
-	Fg8BitBlue          = 34
-	Fg8BitBrightBlue    = 94
-	Fg8BitMagenta       = 35
-	Fg8BitBrightMagenta = 95
-	Fg8BitCyan          = 36
-	Fg8BitBrightCyan    = 96
-	Fg8BitWhite         = 37
-	Fg8BitBrightWhite   = 97
+	Fg4BitBlack         = 30
+	Fg4BitBrightBlack   = 90
+	Fg4BitRed           = 31
+	Fg4BitBrightRed     = 91
+	Fg4BitGreen         = 32
+	Fg4BitBrightGreen   = 92
+	Fg4BitYellow        = 33
+	Fg4BitBrightYellow  = 93
+	Fg4BitBlue          = 34
+	Fg4BitBrightBlue    = 94
+	Fg4BitMagenta       = 35
+	Fg4BitBrightMagenta = 95
+	Fg4BitCyan          = 36
+	Fg4BitBrightCyan    = 96
+	Fg4BitWhite         = 37
+	Fg4BitBrightWhite   = 97
+)
+
+// Background colors.
+const (
+	Bg4BitBlack         = 40
+	Bg4BitBrightBlack   = 100
+	Bg4BitRed           = 41
+	Bg4BitBrightRed     = 101
+	Bg4BitGreen         = 42
+	Bg4BitBrightGreen   = 102
+	Bg4BitYellow        = 43
+	Bg4BitBrightYellow  = 103
+	Bg4BitBlue          = 44
+	Bg4BitBrightBlue    = 104
+	Bg4BitMagenta       = 45
+	Bg4BitBrightMagenta = 105
+	Bg4BitCyan          = 46
+	Bg4BitBrightCyan    = 106
+	Bg4BitWhite         = 47
+	Bg4BitBrightWhite   = 107
 )
 
 // C is the representation of attributes to be used in a string.
@@ -58,37 +59,50 @@ type C struct {
 	attrs int
 	bg    int
 	fg    int
-	bgSet bool
-	fgSet bool
 }
 
 // New returns a new representation of attributes to be used in a string.
-func New() *C {
-	return &C{}
+// In order to no foreground color to be applied, pass 0 to fg4Bit. The same goes to bg4Bit and attrs.
+func New(fg4Bit, bg4Bit, attrs int) (*C, error) {
+	// Foreground color checks.
+	fg4BitWithinNormalRange := (fg4Bit == 0 || (fg4Bit >= Fg4BitBlack && fg4Bit <= Fg4BitWhite))
+	fg4BitWithinBrightRange := (fg4Bit == 0 || (fg4Bit >= Fg4BitBrightBlack && fg4Bit <= Fg4BitBrightWhite))
+
+	if !(fg4BitWithinNormalRange || fg4BitWithinBrightRange) {
+		return nil, errors.New("fg4Bit not within the allowed range")
+	}
+
+	// Background color checks
+	bg4BitWithinNormalRange := (bg4Bit == 0 || (bg4Bit >= Bg4BitBlack && bg4Bit <= Bg4BitWhite))
+	bg4BitWithinBrightRange := (bg4Bit == 0 || (bg4Bit >= Bg4BitBrightBlack && bg4Bit <= Bg4BitBrightWhite))
+
+	if !(bg4BitWithinNormalRange || bg4BitWithinBrightRange) {
+		return nil, errors.New("bg4Bit not within the allowed range")
+	}
+
+	return &C{
+		fg:    fg4Bit,
+		bg:    bg4Bit,
+		attrs: attrs,
+	}, nil
 }
 
-// AddAttrs adds attributes.
-func (c *C) AddAttrs(attrs int) {
-	c.attrs |= attrs
-}
+// MustNew executes New and panics if it returns an error.
+func MustNew(fg4Bit, bg4Bit, attrs int) *C {
+	c, err := New(fg4Bit, bg4Bit, attrs)
 
-// SetBg8BitAttr sets the background attribute using an 8-bit color.
-func (c *C) SetBg8BitAttr(color int) {
-	c.bgSet = true
-	c.bg = color
-}
+	if err != nil {
+		panic(err)
+	}
 
-// SetFg8BitAttr sets the background attribute using an 8-bit color.
-func (c *C) SetFg8BitAttr(color int) {
-	c.fgSet = true
-	c.fg = color
+	return c
 }
 
 // FormatString formats str using the added attributes.
 func (c *C) FormatString(str string) string {
 	var b strings.Builder
 
-	if c.attrs == 0 && !c.bgSet && !c.fgSet {
+	if c.attrs == 0 && c.bg == 0 && c.fg == 0 {
 		return str
 	}
 
@@ -143,23 +157,23 @@ func (c *C) writeAttrs(b *strings.Builder) {
 		}
 	}
 
-	// Background color.
-	if c.bgSet {
-		if atLeastOneFlag {
-			b.WriteString(";" + strconv.Itoa(c.bg))
-		} else {
-			atLeastOneFlag = true
-			b.WriteString(strconv.Itoa(c.bg))
-		}
-	}
-
 	// Foreground color.
-	if c.fgSet {
+	if c.fg != 0 {
 		if atLeastOneFlag {
 			b.WriteString(";" + strconv.Itoa(c.fg))
 		} else {
 			atLeastOneFlag = true
 			b.WriteString(strconv.Itoa(c.fg))
+		}
+	}
+
+	// Background color.
+	if c.bg != 0 {
+		if atLeastOneFlag {
+			b.WriteString(";" + strconv.Itoa(c.bg))
+		} else {
+			atLeastOneFlag = true
+			b.WriteString(strconv.Itoa(c.bg))
 		}
 	}
 

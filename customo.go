@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// Attributes
+// Attributes.
 const (
 	AttrBold                = 1
 	AttrItalic              = 3
@@ -46,7 +46,7 @@ const (
 	AttrBg4BitBrightWhite   = 107
 )
 
-// Format formats str using the added attributes.
+// Format formats str using attrs.
 func Format(str string, attrs ...int) string {
 	var b strings.Builder
 

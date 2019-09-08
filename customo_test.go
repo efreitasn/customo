@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestC(t *testing.T) {
+func TestFormat(t *testing.T) {
 	normalStr := "a"
 	tests := []struct {
 		title string

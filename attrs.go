@@ -17,11 +17,11 @@ func (s SimpleAttr) ANSI() string {
 
 // Attributes.
 const (
-	AttrBold                     = SimpleAttr(1)
-	AttrItalic                   = SimpleAttr(3)
-	AttrUnderline                = SimpleAttr(4)
-	AttrBlink                    = SimpleAttr(5)
-	AttrStrikethrough            = SimpleAttr(9)
+	AttrBold                      = SimpleAttr(1)
+	AttrItalic                    = SimpleAttr(3)
+	AttrUnderline                 = SimpleAttr(4)
+	AttrBlink                     = SimpleAttr(5)
+	AttrStrikethrough             = SimpleAttr(9)
 	AttrFgColor4BitsBlack         = SimpleAttr(30)
 	AttrFgColor4BitsRed           = SimpleAttr(31)
 	AttrFgColor4BitsGreen         = SimpleAttr(32)
@@ -38,6 +38,7 @@ const (
 	AttrBgColor4BitsMagenta       = SimpleAttr(45)
 	AttrBgColor4BitsCyan          = SimpleAttr(46)
 	AttrBgColor4BitsWhite         = SimpleAttr(47)
+	AttrOverline                  = SimpleAttr(53)
 	AttrFgColor4BitsBrightBlack   = SimpleAttr(90)
 	AttrFgColor4BitsBrightRed     = SimpleAttr(91)
 	AttrFgColor4BitsBrightGreen   = SimpleAttr(92)

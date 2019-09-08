@@ -16,7 +16,7 @@ func TestC(t *testing.T) {
 			"Bold, crossed, bright, black fg and cyan bg",
 			[]int{
 				AttrBold,
-				AttrCrossed,
+				AttrStrikethrough,
 				AttrFg4BitBlack,
 				AttrBg4BitBrightCyan,
 			},

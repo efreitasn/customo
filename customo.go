@@ -9,8 +9,9 @@ import (
 const (
 	AttrBold                = 1
 	AttrItalic              = 3
+	AttrUnderline           = 4
 	AttrBlink               = 5
-	AttrCrossed             = 9
+	AttrStrikethrough       = 9
 	AttrFg4BitBlack         = 30
 	AttrFg4BitRed           = 31
 	AttrFg4BitGreen         = 32

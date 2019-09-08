@@ -1,6 +1,6 @@
 # customo
 [![GoDoc](https://godoc.org/github.com/efreitasn/customo?status.svg)](https://godoc.org/github.com/efreitasn/customo)  
-customo helps when creating strings using ASCII escape codes attributes, such as italic, bold and custom foreground and background colors.
+customo helps when creating strings using ANSI escape codes attributes, such as italic, bold and custom foreground and background colors.
 
 ## Installation
 ```shell

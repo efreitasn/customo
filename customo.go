@@ -1,4 +1,4 @@
-// Package customo helps when creating strings using ASCII escape codes.
+// Package customo helps when creating strings using ANSI escape codes attributes, such as italic, bold and custom foreground and background colors.
 package customo
 
 import (

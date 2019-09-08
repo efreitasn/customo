@@ -2,8 +2,6 @@
 [![GoDoc](https://godoc.org/github.com/efreitasn/customo?status.svg)](https://godoc.org/github.com/efreitasn/customo)  
 customo helps when creating strings using ASCII escape codes attributes, such as italic, bold and custom foreground and background colors.
 
-**OBS:** customo only supports 4 bit colors.
-
 ## Installation
 ```shell
 go get github.com/efreitasn/customo
@@ -26,8 +24,8 @@ func main() {
 		"Custom string",
 		customo.AttrBold,
 		customo.AttrUnderline,
-		customo.AttrBg4BitGreen,
-		customo.AttrFg4BitWhite,
+		customo.AttrBgColor4BitGreen,
+		customo.AttrFgColor4BitWhite,
 	)
 
 	fmt.Println(str)

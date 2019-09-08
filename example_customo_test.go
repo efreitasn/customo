@@ -11,8 +11,8 @@ func ExampleFormat() {
 		"Custom string",
 		customo.AttrBold,
 		customo.AttrStrikethrough,
-		customo.AttrFg4BitBlack,
-		customo.AttrBg4BitBrightCyan,
+		customo.AttrFgColor4BitBlack,
+		customo.AttrBgColor4BitBrightCyan,
 	)
 
 	fmt.Println(str)

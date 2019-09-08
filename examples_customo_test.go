@@ -11,8 +11,8 @@ func ExampleFormat_colors4Bits() {
 		"Custom string",
 		customo.AttrBold,
 		customo.AttrStrikethrough,
-		customo.AttrFgColor4BitBlack,
-		customo.AttrBgColor4BitBrightCyan,
+		customo.AttrFgColor4BitsBlack,
+		customo.AttrBgColor4BitsBrightCyan,
 	)
 
 	fmt.Println(str)
@@ -23,8 +23,8 @@ func ExampleFormat_colors8Bits() {
 		"Custom string",
 		customo.AttrBold,
 		customo.AttrStrikethrough,
-		customo.AttrFgColor8Bit(232),
-		customo.AttrBgColor8Bit(255),
+		customo.AttrFgColor8Bits(232),
+		customo.AttrBgColor8Bits(255),
 	)
 
 	fmt.Println(str)
@@ -35,8 +35,8 @@ func ExampleFormat_colors24Bits() {
 		"Custom string",
 		customo.AttrBold,
 		customo.AttrStrikethrough,
-		customo.AttrFgColor24Bit(0, 255, 0),
-		customo.AttrBgColor24Bit(255, 0, 0),
+		customo.AttrFgColor24Bits(0, 255, 0),
+		customo.AttrBgColor24Bits(255, 0, 0),
 	)
 
 	fmt.Println(str)

@@ -22,80 +22,80 @@ const (
 	AttrUnderline                = SimpleAttr(4)
 	AttrBlink                    = SimpleAttr(5)
 	AttrStrikethrough            = SimpleAttr(9)
-	AttrFgColor4BitBlack         = SimpleAttr(30)
-	AttrFgColor4BitRed           = SimpleAttr(31)
-	AttrFgColor4BitGreen         = SimpleAttr(32)
-	AttrFgColor4BitYellow        = SimpleAttr(33)
-	AttrFgColor4BitBlue          = SimpleAttr(34)
-	AttrFgColor4BitMagenta       = SimpleAttr(35)
-	AttrFgColor4BitCyan          = SimpleAttr(36)
-	AttrFgColor4BitWhite         = SimpleAttr(37)
-	AttrBgColor4BitBlack         = SimpleAttr(40)
-	AttrBgColor4BitRed           = SimpleAttr(41)
-	AttrBgColor4BitGreen         = SimpleAttr(42)
-	AttrBgColor4BitYellow        = SimpleAttr(43)
-	AttrBgColor4BitBlue          = SimpleAttr(44)
-	AttrBgColor4BitMagenta       = SimpleAttr(45)
-	AttrBgColor4BitCyan          = SimpleAttr(46)
-	AttrBgColor4BitWhite         = SimpleAttr(47)
-	AttrFgColor4BitBrightBlack   = SimpleAttr(90)
-	AttrFgColor4BitBrightRed     = SimpleAttr(91)
-	AttrFgColor4BitBrightGreen   = SimpleAttr(92)
-	AttrFgColor4BitBrightYellow  = SimpleAttr(93)
-	AttrFgColor4BitBrightBlue    = SimpleAttr(94)
-	AttrFgColor4BitBrightMagenta = SimpleAttr(95)
-	AttrFgColor4BitBrightCyan    = SimpleAttr(96)
-	AttrFgColor4BitBrightWhite   = SimpleAttr(97)
-	AttrBgColor4BitBrightBlack   = SimpleAttr(100)
-	AttrBgColor4BitBrightRed     = SimpleAttr(101)
-	AttrBgColor4BitBrightGreen   = SimpleAttr(102)
-	AttrBgColor4BitBrightYellow  = SimpleAttr(103)
-	AttrBgColor4BitBrightBlue    = SimpleAttr(104)
-	AttrBgColor4BitBrightMagenta = SimpleAttr(105)
-	AttrBgColor4BitBrightCyan    = SimpleAttr(106)
-	AttrBgColor4BitBrightWhite   = SimpleAttr(107)
+	AttrFgColor4BitsBlack         = SimpleAttr(30)
+	AttrFgColor4BitsRed           = SimpleAttr(31)
+	AttrFgColor4BitsGreen         = SimpleAttr(32)
+	AttrFgColor4BitsYellow        = SimpleAttr(33)
+	AttrFgColor4BitsBlue          = SimpleAttr(34)
+	AttrFgColor4BitsMagenta       = SimpleAttr(35)
+	AttrFgColor4BitsCyan          = SimpleAttr(36)
+	AttrFgColor4BitsWhite         = SimpleAttr(37)
+	AttrBgColor4BitsBlack         = SimpleAttr(40)
+	AttrBgColor4BitsRed           = SimpleAttr(41)
+	AttrBgColor4BitsGreen         = SimpleAttr(42)
+	AttrBgColor4BitsYellow        = SimpleAttr(43)
+	AttrBgColor4BitsBlue          = SimpleAttr(44)
+	AttrBgColor4BitsMagenta       = SimpleAttr(45)
+	AttrBgColor4BitsCyan          = SimpleAttr(46)
+	AttrBgColor4BitsWhite         = SimpleAttr(47)
+	AttrFgColor4BitsBrightBlack   = SimpleAttr(90)
+	AttrFgColor4BitsBrightRed     = SimpleAttr(91)
+	AttrFgColor4BitsBrightGreen   = SimpleAttr(92)
+	AttrFgColor4BitsBrightYellow  = SimpleAttr(93)
+	AttrFgColor4BitsBrightBlue    = SimpleAttr(94)
+	AttrFgColor4BitsBrightMagenta = SimpleAttr(95)
+	AttrFgColor4BitsBrightCyan    = SimpleAttr(96)
+	AttrFgColor4BitsBrightWhite   = SimpleAttr(97)
+	AttrBgColor4BitsBrightBlack   = SimpleAttr(100)
+	AttrBgColor4BitsBrightRed     = SimpleAttr(101)
+	AttrBgColor4BitsBrightGreen   = SimpleAttr(102)
+	AttrBgColor4BitsBrightYellow  = SimpleAttr(103)
+	AttrBgColor4BitsBrightBlue    = SimpleAttr(104)
+	AttrBgColor4BitsBrightMagenta = SimpleAttr(105)
+	AttrBgColor4BitsBrightCyan    = SimpleAttr(106)
+	AttrBgColor4BitsBrightWhite   = SimpleAttr(107)
 )
 
-// FgColor8Bit is an 8 bit foreground color attribute.
-type FgColor8Bit int
+// FgColor8Bits is an 8 bit foreground color attribute.
+type FgColor8Bits int
 
-// AttrFgColor8Bit returns a new 8 bit foreground color attribute.
-func AttrFgColor8Bit(color int) FgColor8Bit {
-	return FgColor8Bit(color)
+// AttrFgColor8Bits returns a new 8 bit foreground color attribute.
+func AttrFgColor8Bits(color int) FgColor8Bits {
+	return FgColor8Bits(color)
 }
 
 // ANSI returns a representation to be used as an ANSI escape code.
-func (c FgColor8Bit) ANSI() string {
+func (c FgColor8Bits) ANSI() string {
 	return "38;5;" + strconv.Itoa(int(c))
 }
 
-// BgColor8Bit is an 8 bit background color attribute.
-type BgColor8Bit int
+// BgColor8Bits is an 8 bit background color attribute.
+type BgColor8Bits int
 
-// AttrBgColor8Bit returns a new 8 bit background color attribute.
-func AttrBgColor8Bit(bg8BitColor int) BgColor8Bit {
-	return BgColor8Bit(bg8BitColor)
+// AttrBgColor8Bits returns a new 8 bit background color attribute.
+func AttrBgColor8Bits(bg8BitsColor int) BgColor8Bits {
+	return BgColor8Bits(bg8BitsColor)
 }
 
 // ANSI returns a representation to be used as an ANSI escape code.
-func (c BgColor8Bit) ANSI() string {
+func (c BgColor8Bits) ANSI() string {
 	return "48;5;" + strconv.Itoa(int(c))
 }
 
-// FgColor24Bit is a 24 bit foreground color attribute.
-type FgColor24Bit struct {
+// FgColor24Bits is a 24 bit foreground color attribute.
+type FgColor24Bits struct {
 	red   int
 	green int
 	blue  int
 }
 
-// AttrFgColor24Bit returns a new 24 bit foreground color attribute.
-func AttrFgColor24Bit(red, green, blue int) *FgColor24Bit {
-	return &FgColor24Bit{red, green, blue}
+// AttrFgColor24Bits returns a new 24 bit foreground color attribute.
+func AttrFgColor24Bits(red, green, blue int) *FgColor24Bits {
+	return &FgColor24Bits{red, green, blue}
 }
 
 // ANSI returns a representation to be used as an ANSI escape code.
-func (c *FgColor24Bit) ANSI() string {
+func (c *FgColor24Bits) ANSI() string {
 	colorStr := strconv.Itoa(c.red) + ";"
 	colorStr += strconv.Itoa(c.green) + ";"
 	colorStr += strconv.Itoa(c.blue)
@@ -103,20 +103,20 @@ func (c *FgColor24Bit) ANSI() string {
 	return "38;2;" + colorStr
 }
 
-// BgColor24Bit is a 24 bit background color attribute.
-type BgColor24Bit struct {
+// BgColor24Bits is a 24 bit background color attribute.
+type BgColor24Bits struct {
 	red   int
 	green int
 	blue  int
 }
 
-// AttrBgColor24Bit returns a new 24 bit background color attribute.
-func AttrBgColor24Bit(red, green, blue int) *BgColor24Bit {
-	return &BgColor24Bit{red, green, blue}
+// AttrBgColor24Bits returns a new 24 bit background color attribute.
+func AttrBgColor24Bits(red, green, blue int) *BgColor24Bits {
+	return &BgColor24Bits{red, green, blue}
 }
 
 // ANSI returns a representation to be used as an ANSI escape code.
-func (c *BgColor24Bit) ANSI() string {
+func (c *BgColor24Bits) ANSI() string {
 	colorStr := strconv.Itoa(c.red) + ";"
 	colorStr += strconv.Itoa(c.green) + ";"
 	colorStr += strconv.Itoa(c.blue)

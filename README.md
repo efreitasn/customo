@@ -25,8 +25,8 @@ func main() {
 		"Custom string",
 		customo.AttrBold,
 		customo.AttrUnderline,
-		customo.AttrBgColor4BitGreen,
-		customo.AttrFgColor4BitWhite,
+		customo.AttrBgColor4BitsGreen,
+		customo.AttrFgColor4BitsWhite,
 	)
 
 	fmt.Println(str)
@@ -48,8 +48,8 @@ func main() {
 	str := customo.Format(
 		"Custom string",
 		customo.AttrBold,
-		customo.AttrFgColor8Bit(236),
-		customo.AttrBgColor8Bit(255),
+		customo.AttrFgColor8Bits(236),
+		customo.AttrBgColor8Bits(255),
 	)
 
 	fmt.Println(str)
@@ -72,8 +72,8 @@ func main() {
 		"Custom string",
 		customo.AttrBold,
 		customo.AttrUnderline,
-		customo.AttrFgColor24Bit(0, 0, 255),
-		customo.AttrBgColor24Bit(255, 0, 0),
+		customo.AttrFgColor24Bits(0, 0, 255),
+		customo.AttrBgColor24Bits(255, 0, 0),
 	)
 
 	fmt.Println(str)

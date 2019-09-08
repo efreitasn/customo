@@ -1,3 +1,4 @@
+// Package customo helps when creating strings using ASCII escape codes.
 package customo
 
 import (
